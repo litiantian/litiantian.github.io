@@ -72,7 +72,7 @@
     <article id="post-flex" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/11/flex/" class="article-date">
-  <time datetime="2017-09-11T12:05:50.000Z" itemprop="datePublished">2017-09-11</time>
+  <time datetime="2017-09-11T12:12:24.000Z" itemprop="datePublished">2017-09-11</time>
 </a>
     
   </div>
@@ -84,42 +84,6 @@
   
     <h1 itemprop="name">
       <a class="article-title" href="/2017/09/11/flex/">flex</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj7g4kdq10001bkaydufcsoqw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-flex属性的归类" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/11/flex属性的归类/" class="article-date">
-  <time datetime="2017-09-11T10:57:30.000Z" itemprop="datePublished">2017-09-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/11/flex属性的归类/">flex属性的归类</a>
     </h1>
   
 
@@ -170,20 +134,25 @@
 </li>
 </ol>
 <h3 id="伸缩项目上设置的属性"><a href="#伸缩项目上设置的属性" class="headerlink" title="伸缩项目上设置的属性"></a>伸缩项目上设置的属性</h3><ol>
-<li><p>order伸缩项目的排列位置，order的值越小，越朝前排列，如下例<br><img src="/2017/09/11/flex属性的归类/flex属性的归档/1.png" alt="代码示例"></p>
+<li>order伸缩项目的排列位置，order的值越小，越朝前排列，如下例<br><img src="/2017/09/11/flex/2.png" alt="代码示例"><br><img src="/2017/09/11/flex/1.png" alt="结果图"></li>
+<li>flex-grow定义项目空间的放大比例 默认为0<br>当伸缩项目从左到右排列还有剩余空间时，给所有伸缩项目都设置 flex-grow: 1;<br>则他们将会均分剩余空间。如下图：<br><img src="/2017/09/11/flex/3.png" alt="结果图"><br>当设置其中一个为flex-grow: 2;时，2会占据所有剩余空间，如下代码</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">li:nth-child(2)&#123;</div><div class="line">	flex-grow: 2;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>结果如图<br><img src="/2017/09/11/flex/4.png" alt="结果图"></p>
+<ol>
+<li>flex-shrink：定义项目空间的缩小比例 默认为1，当伸缩项目总宽度超过flex容器的宽度时，适用flex-shrink，原理和flex-grow相同。</li>
+<li>flex-basis：定义项目本身的大小（当成width使用）</li>
+<li><p>flex复合写法<br> flex: flex-grow flex-shrink flex-basis</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flex: 0 1 auto;</div></pre></td></tr></table></figure>
 </li>
-<li><p>flex-grow</p>
+<li><p>align-self</p>
 </li>
-<li>flex-shrink</li>
-<li>flex-basis</li>
-<li>flex</li>
-<li>align-self</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex属性的归类/" data-id="cj7g4kdpu0000bkayqzdcsuvb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj7g4s1eb0000cwaylkbx2j4b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -220,7 +189,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj7g4kdq50002bkayosakl9tj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj7g4s1ep0003cwayg6jrblhu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -265,7 +234,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj7g4kdq80003bkaycne5o4i0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj7g4s1em0002cwaygyj0afy2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -306,10 +275,6 @@
         
           <li>
             <a href="/2017/09/11/flex/">flex</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/11/flex属性的归类/">flex属性的归类</a>
           </li>
         
           <li>
