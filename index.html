@@ -122,8 +122,7 @@
 * baseline: 项目的第一行文字的基线对齐。
 * stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
 </code></pre></li>
-<li><p>algin-content定义多行的对齐方式，当只有一行的时候没有效果<br> algin-content: ;</p>
-</li>
+<li>algin-content定义多行的对齐方式，当只有一行的时候没有效果<br> algin-content: ;</li>
 <li><p>flex-wrap是否换行</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flex-wrap: no-wrap wrap;</div></pre></td></tr></table></figure>
 <p> 他有两个属性：wrap no-wrap</p>
@@ -134,25 +133,27 @@
 </li>
 </ol>
 <h3 id="伸缩项目上设置的属性"><a href="#伸缩项目上设置的属性" class="headerlink" title="伸缩项目上设置的属性"></a>伸缩项目上设置的属性</h3><ol>
-<li>order伸缩项目的排列位置，order的值越小，越朝前排列，如下例<br><img src="/2017/09/11/flex/2.png" alt="代码示例"><br><img src="/2017/09/11/flex/1.png" alt="结果图"></li>
-<li>flex-grow定义项目空间的放大比例 默认为0<br>当伸缩项目从左到右排列还有剩余空间时，给所有伸缩项目都设置 flex-grow: 1;<br>则他们将会均分剩余空间。如下图：<br><img src="/2017/09/11/flex/3.png" alt="结果图"><br>当设置其中一个为flex-grow: 2;时，2会占据所有剩余空间，如下代码</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">li:nth-child(2)&#123;</div><div class="line">	flex-grow: 2;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
-<p>结果如图<br><img src="/2017/09/11/flex/4.png" alt="结果图"></p>
-<ol>
-<li>flex-shrink：定义项目空间的缩小比例 默认为1，当伸缩项目总宽度超过flex容器的宽度时，适用flex-shrink，原理和flex-grow相同。</li>
+<li>order伸缩项目的排列位置，order的值越小，越朝前排列，如下例<br> <img src="/2017/09/11/flex/2.png" alt="代码示例"><br> <img src="/2017/09/11/flex/1.png" alt="结果图"></li>
+<li><p>flex-grow定义项目空间的放大比例 默认为0<br> 当伸缩项目从左到右排列还有剩余空间时，给所有伸缩项目都设置 flex-grow: 1;<br> 则他们将会均分剩余空间。如下图：<br> <img src="/2017/09/11/flex/3.png" alt="结果图"><br> 当设置其中一个为flex-grow: 2;时，2会占据所有剩余空间，如下代码</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">li:nth-child(2)&#123;</div><div class="line">	flex-grow: 2;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p> 结果如图<br> <img src="/2017/09/11/flex/4.png" alt="结果图"></p>
+</li>
+<li><p>flex-shrink：定义项目空间的缩小比例默认为1，当伸缩项目总宽度超过flex容器的宽度时，适用flex-shrink，原理和flex-grow相同。</p>
+</li>
 <li>flex-basis：定义项目本身的大小（当成width使用）</li>
 <li><p>flex复合写法<br> flex: flex-grow flex-shrink flex-basis</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">flex: 0 1 auto;</div></pre></td></tr></table></figure>
 </li>
-<li><p>align-self</p>
+<li><p>align-self:改变单个元素的对齐方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">li:nth-child(2)&#123;</div><div class="line">		align-self: flex-end;</div><div class="line">		&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
+<p>结果图如下：<br><img src="/2017/09/11/flex/5.png" alt="结果图"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj7g4s1eb0000cwaylkbx2j4b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj7g5u6sv0000gkayv77rr86d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -189,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj7g4s1ep0003cwayg6jrblhu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj7g5u6t50002gkayw2ubxqhw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -234,7 +235,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj7g4s1em0002cwaygyj0afy2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj7g5u6t10001gkaycfho5kqj" class="article-share-link">Share</a>
       
       
     </footer>
