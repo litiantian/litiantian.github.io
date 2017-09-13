@@ -69,6 +69,53 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-渐变" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/13/渐变/" class="article-date">
+  <time datetime="2017-09-13T10:58:18.000Z" itemprop="datePublished">2017-09-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/13/渐变/">渐变</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="线性渐变与径向渐变"><a href="#线性渐变与径向渐变" class="headerlink" title="线性渐变与径向渐变"></a>线性渐变与径向渐变</h2><h3 id="线性渐变"><a href="#线性渐变" class="headerlink" title="线性渐变"></a>线性渐变</h3><p>首先说一下渐变的兼容，以及标准写法和兼容写法的区别和运行结果的不一致.<br>1.标准写法，不加前缀，需要在方向前加to,渐变颜色顺序从右到左<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item1&#123;</div><div class="line">		background: linear-gradient(to left,blue,red,green);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/13/渐变/1.png" alt="标准写法"></p>
+<p>2.兼容写法：不能再方向前加to,渐变颜色顺序从左到右<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item1&#123;</div><div class="line">		background: -webkit-linear-gradient(left,blue,red,green);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/13/渐变/1-1.png" alt="兼容写法"><br>3.颜色后面加像素，如下例，40px 50px代表蓝红的过渡区域是40到50之间，也支持百分比<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item3&#123;</div><div class="line">		background: -webkit-linear-gradient(0,blue 40px,green 50px);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/13/渐变/3.png" alt="item3"><br>4.方向可以写度数，如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item2&#123;</div><div class="line">		background: -webkit-linear-gradient(45deg,blue,red,green);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/13/渐变/2.png" alt="item2"></p>
+<h3 id="径向渐变"><a href="#径向渐变" class="headerlink" title="径向渐变"></a>径向渐变</h3><p>径向渐变是以中心点向外扩散的。<br>1.不能指定角度，圆的旋转无意义,100px代表的是半径<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item6&#123;</div><div class="line">			background: -webkit-radial-gradient(blue 100px,green 100px);	</div><div class="line">		&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/13/渐变/6.png" alt="item6"><br>2.有方向的，如top，从上方向下扩散，如下图：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.item7&#123;</div><div class="line">		background: -webkit-radial-gradient(top,blue 50px,green 100px);	</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/13/渐变/7.png" alt="item7"><br>3.关键字：repeating，代表可以重复区域在50px到70px的过渡区，都是等比例的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.item8&#123;</div><div class="line">		/* 不能指定角度，圆的旋转无意义,100px代表的时半径 */</div><div class="line">		background: -webkit-repeating-radial-gradient(blue 50px,green 70px);	</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/13/渐变/8.png" alt="item8"><br>4.在长方体内，径向渐变是椭圆，可以添加circle属性变成圆形<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.item9&#123;</div><div class="line">		width: 420px;</div><div class="line">		background: -webkit-repeating-radial-gradient(circle,blue 50px,green 70px);	</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p><img src="/2017/09/13/渐变/9.png" alt="item9"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cj7iwzf42000264ayb0m8buhn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-flex" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/11/flex/" class="article-date">
@@ -153,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj7g5u6sv0000gkayv77rr86d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj7iwzf3r000064ay2pf99sk0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -190,7 +237,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj7g5u6t50002gkayw2ubxqhw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj7iwzf45000364ay1dacskyy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -235,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj7g5u6t10001gkaycfho5kqj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj7iwzf3x000164ayrlq0jrs1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -273,6 +320,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/13/渐变/">渐变</a>
+          </li>
         
           <li>
             <a href="/2017/09/11/flex/">flex</a>
