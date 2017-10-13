@@ -69,6 +69,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-函数闭包" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/13/函数闭包/" class="article-date">
+  <time datetime="2017-10-13T14:30:34.000Z" itemprop="datePublished">2017-10-13</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/13/函数闭包/">函数闭包</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>函数的闭包是个老生常谈的话题，但说起闭包，还是很难透彻的理解它的含义，在很多应用中都要使用闭包实现，要想搞明白函数闭包是什么，首先必须得明白变量的作用域。</p>
+<h3 id="变量的作用域"><a href="#变量的作用域" class="headerlink" title="变量的作用域"></a>变量的作用域</h3><p><strong>变量分为：全局变量和局部变量</strong><br>1.局部变量：在函数内部声明的，不可以在函数外部使用。（本质原因：函数再被调用的时候会入栈，并且分配空间，函数内部的变量，都是在这块空间内部声明的，当函数运行完毕之后就会出栈，系统回收空间，函数内部的变量所占空间也会被回收，所以不能在函数外面使用函数内部定义的变量）<br>2.全局变量：在函数以外声明的。<br>eg1. 数组里面的两个a是同一个a。对象引用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> var a = &#123;name:&quot;张三&quot;, age:18&#125;;</div><div class="line"> var arr = [];</div><div class="line"> arr.push(a);</div><div class="line"> arr.push(a);</div><div class="line"> // a发生变化之后，数组内部也会改变、。</div><div class="line">a.name = &quot;李四&quot;;</div><div class="line">console.log(arr[0] == arr[1]);</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426634-6d60d75cd957ecf3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="结果1.png"><br>eg2.函数t运行两次，就会有2个a。这两个a不是同一个a<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">      var arr = [];</div><div class="line">function t()&#123;</div><div class="line">	var a = &#123;name:&quot;张三&quot;, age:18&#125;;</div><div class="line">	arr.push(a);</div><div class="line">&#125;</div><div class="line">t();</div><div class="line">t();</div><div class="line">arr[0].name = &quot;李四&quot;;</div><div class="line">console.log(arr);</div><div class="line">console.log(arr[0] == arr[1]);</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426634-f359823f26aee4e5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="结果2.png"><br>eg3.执行同一次函数的时候，变量是相同的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">      var arr = [];</div><div class="line">function t()&#123;</div><div class="line">	var a = &#123;name:&quot;张三&quot;, age:18&#125;;</div><div class="line">	arr.push(a);</div><div class="line">	arr.push(a);</div><div class="line">&#125;</div><div class="line">t();</div><div class="line">arr[0].name = &quot;李四&quot;;</div><div class="line">console.log(arr);</div><div class="line">console.log(arr[0] == arr[1]);</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426634-6e486c3baf5e0d38.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="结果3.png"><br>上面三个例子充分解释了变量作用域的区别。</p>
+<h3 id="函数的闭包"><a href="#函数的闭包" class="headerlink" title="函数的闭包"></a>函数的闭包</h3><p>闭包简单来说就是函数内部的函数，闭包里面使用局部变量和函数参数的时候，用的就是外部函数的局部变量。</p>
+<p>1.同一个函数调用两次，会返回两个函数f1，和f2。 f1和f2里面的a分别是第一次和第二次调用fn的时候生成的a。所以是两个不同的a<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">function fn()&#123;</div><div class="line">	var a = 10; // 局部变量</div><div class="line">	return function()&#123;</div><div class="line">		console.log(++a);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line">var f1 = fn(10);</div><div class="line">var f2 = fn(10);</div><div class="line">f1();</div><div class="line">f1();</div><div class="line">f1();</div><div class="line">f1();</div><div class="line">f1();</div><div class="line">f2();</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426634-94653dd827b888b8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="结果4.png"><br>2.调用一次函数返回两个函数f1，和f2。f1和f2里面的a都是第一次调用fn的时候生成的，所以是同一个a<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">function fn()&#123;</div><div class="line">			var a = 10; // 局部变量</div><div class="line">			function in1()&#123;</div><div class="line">				console.log(++a);</div><div class="line">			&#125;</div><div class="line">			function in2()&#123;</div><div class="line">			    console.log(++a);</div><div class="line">			&#125;</div><div class="line">			return [in1, in2];</div><div class="line">		&#125;</div><div class="line">		var arr = fn();</div><div class="line">		var f1 = arr[0];</div><div class="line">		var f2 = arr[1];</div><div class="line">		f1();</div><div class="line">		f1();</div><div class="line">		f1();</div><div class="line">		f1();</div><div class="line">		f1();</div><div class="line">		f2();</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426634-3236c279eee91e25.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="结果5.png"><br>闭包虽然用处很大，但它的弊端也不容忽视。闭包会导致函数运行结束之后局部变量的空间不会被释放从而造成内存泄露（执行的次数越多，占用的内存越多），所以一些经常需要重复执行的代码不适合使用闭包。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cj8pztcy50002akayozh7obel" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-渐变" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/09/13/渐变/" class="article-date">
@@ -106,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cj7iyuv400002ccay5uqmzttd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cj8pztcy90003akayabgc1o2e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj7iyuv3p0000ccayx206r17a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj8pztcxv0000akays8b5ym7s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -237,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj7iyuv430003ccay80z1aj9x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj8pztcyc0004akaymm2jxgfb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -282,7 +328,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj7iyuv3u0001ccaytx5kyd8e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj8pztcy00001akayephlz8i7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -309,7 +355,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li></ul>
     </div>
   </div>
 
@@ -320,6 +366,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/10/13/函数闭包/">函数闭包</a>
+          </li>
         
           <li>
             <a href="/2017/09/13/渐变/">渐变</a>
