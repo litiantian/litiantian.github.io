@@ -69,6 +69,49 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-浅谈js事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/18/浅谈js事件/" class="article-date">
+  <time datetime="2017-10-18T14:49:40.000Z" itemprop="datePublished">2017-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/18/浅谈js事件/">浅谈js事件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一：js事件分为四大类：先说说常用的一些属性"><a href="#一：js事件分为四大类：先说说常用的一些属性" class="headerlink" title="一：js事件分为四大类：先说说常用的一些属性"></a>一：js事件分为四大类：先说说常用的一些属性</h3><p>1.键盘事件：<br>onkeydown 键盘按下<br>onkeyup 键盘抬起<br>onkeypress 键盘按下<br>2.鼠标事件：<br><strong>注意：out和over会在鼠标从父级移入子级的时候触发，而enter和leave只有在移入和移出子级整体的时候触发</strong><br>onmoveover 鼠标移入<br>onmouseout 鼠标移出<br>onmouseenter 鼠标移入<br>onmouseleave 鼠标移出<br>onmousedown 鼠标按下<br>onmouseup 鼠标抬起<br>ondblclick 鼠标双击<br>oncontextmenu 鼠标右键<br>3.表单事件：<br>onsubmit 表单提交：点击的是提交按钮，form表单触发onsubmit<br>onreset 表单重置<br>onfocus 获取焦点<br>__注意：一些事件中，系统会有默认事件触发，比如右键的时候会弹出来菜单，比如按了提交按钮跳转网页。这些都是默认事件。默认事件可以被阻止<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return false;</div></pre></td></tr></table></figure></p>
+<p>4.移动端事件<br>ontouchstart 相当于鼠标按下onmousedown<br>ontouchmove 相当于鼠标移动onmousemove<br>ontouchend 等价于 鼠标抬起onmouseup</p>
+<h3 id="二：事件对象"><a href="#二：事件对象" class="headerlink" title="二：事件对象"></a>二：事件对象</h3><p>以keydown为例<br><strong>注意:keydown支持特殊按键，如：command shift 但不区分大小写 A 和 a 的keyCode都是65;  keypress不支持特殊按键,keyCode区分大小写</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">document.onkeydown = function(ev)&#123;</div><div class="line">        // 获取事件对象可以使用window.event，注意：在火狐或取不到	</div><div class="line">		// 在火狐需要通过参数获取</div><div class="line">		// 兼容写法</div><div class="line">		var evObj = window.event || ev;</div><div class="line">		console.log(evObj.keyCode);</div><div class="line">		// 如何判断是否按了组合键</div><div class="line">		if(evObj.keyCode == 67 &amp;&amp; evObj.metaKey)&#123;</div><div class="line">				console.log(&quot;按了command + c&quot;);</div><div class="line">			&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>1.evObj.keyCode 每个按键对应一个数字编码<br>2.evObj.target 触发了事件的元素，触发事件的元素不一定是绑定事件的元素<br>3.evObj.offsetX/Y 鼠标距离自身的距离<br>4.evObj.clientX/Y 鼠标距离屏幕的距离<br>5.evObj.pageX/Y 鼠标距离页面的距离</p>
+<h3 id="三：事件绑定"><a href="#三：事件绑定" class="headerlink" title="三：事件绑定"></a>三：事件绑定</h3><p>第一种就是上面例子代码，但第一种不能绑定多个事件；而下面的这种可以绑定多个事件。<br>1.非IE绑定事件的方法<br><strong>格式: 元素.addEventListener(“不包含on的事件名”,时间对应的函数,是否在铺获阶段触发false这或者true);</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redDiv.addEventListener(&quot;click&quot;,function()&#123;</div><div class="line"> 	console.log(&quot;2&quot;);</div><div class="line"> &#125;,false);</div></pre></td></tr></table></figure></p>
+<p>2.IE绑定事件的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redDiv.attachEvent(&quot;click&quot;,function()&#123;</div><div class="line"> 	console.log(&quot;2&quot;);</div><div class="line"> &#125;,false);</div></pre></td></tr></table></figure></p>
+<p>3.兼容写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">**** 参数：</div><div class="line">****	element:代表要绑定的事件</div><div class="line">****	type:要绑定的事件名(不含on)</div><div class="line">****	fn:要绑定的事件对应的函数</div><div class="line">function addEvent(element,type,fn)&#123;</div><div class="line">		if(element.addEventListener)&#123;</div><div class="line">			element.addEventListener(type,fn,false);</div><div class="line">		&#125;else if(element.attachEvent)&#123;</div><div class="line">			element.attachEvent(&quot;on&quot; + type,fn);</div><div class="line">		&#125;else&#123;</div><div class="line">			element[&quot;on&quot; + type]= fn;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cj8x5msl5000106ayqae7wds8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-函数闭包" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/13/函数闭包/" class="article-date">
@@ -105,7 +148,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cj8v8tzav000130ay09i715ca" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cj8x5mskz000006aybgxefhbk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -152,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cj8v8tzbj000330aympobrwvc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cj8x5msla000206ay1ff5qn6s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -246,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj8v8tzbo000430ayko5zu6vx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj8x5mslj000506ayin6neez9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -283,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj8v8tzbh000230ay4ljv6m9z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj8x5msld000306aypdkswyd3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -328,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj8v8tzaq000030ayjhrkjojm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj8x5mslg000406ay4yxyf0x6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -368,6 +411,10 @@
       <ul>
         
           <li>
+            <a href="/2017/10/18/浅谈js事件/">浅谈js事件</a>
+          </li>
+        
+          <li>
             <a href="/2017/10/13/函数闭包/">函数闭包</a>
           </li>
         
@@ -381,10 +428,6 @@
         
           <li>
             <a href="/2017/09/11/第一篇记录/">第一篇记录</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/11/hello-world/">Hello World</a>
           </li>
         
       </ul>

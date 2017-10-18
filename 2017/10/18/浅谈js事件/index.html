@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈js事件 | 马大哈tt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一：js事件分为四大类：先说说常用的一些属性1.键盘事件：onkeydown 键盘按下onkeyup 键盘抬起onkeypress 键盘按下2.鼠标事件：注意：out和over会在鼠标从父级移入子级的时候触发，而enter和leave只有在移入和移出子级整体的时候触发onmoveover 鼠标移入onmouseout 鼠标移出onmouseenter 鼠标移入onmouseleave 鼠标移出on">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈js事件">
+<meta property="og:url" content="http://yoursite.com/2017/10/18/浅谈js事件/index.html">
+<meta property="og:site_name" content="马大哈tt">
+<meta property="og:description" content="一：js事件分为四大类：先说说常用的一些属性1.键盘事件：onkeydown 键盘按下onkeyup 键盘抬起onkeypress 键盘按下2.鼠标事件：注意：out和over会在鼠标从父级移入子级的时候触发，而enter和leave只有在移入和移出子级整体的时候触发onmoveover 鼠标移入onmouseout 鼠标移出onmouseenter 鼠标移入onmouseleave 鼠标移出on">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-10-18T14:50:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈js事件">
+<meta name="twitter:description" content="一：js事件分为四大类：先说说常用的一些属性1.键盘事件：onkeydown 键盘按下onkeyup 键盘抬起onkeypress 键盘按下2.鼠标事件：注意：out和over会在鼠标从父级移入子级的时候触发，而enter和leave只有在移入和移出子级整体的时候触发onmoveover 鼠标移入onmouseout 鼠标移出onmouseenter 鼠标移入onmouseleave 鼠标移出on">
+  
+    <link rel="alternate" href="/atom.xml" title="马大哈tt" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">马大哈tt</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录生活点滴</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-浅谈js事件" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/18/浅谈js事件/" class="article-date">
+  <time datetime="2017-10-18T14:49:40.000Z" itemprop="datePublished">2017-10-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈js事件
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一：js事件分为四大类：先说说常用的一些属性"><a href="#一：js事件分为四大类：先说说常用的一些属性" class="headerlink" title="一：js事件分为四大类：先说说常用的一些属性"></a>一：js事件分为四大类：先说说常用的一些属性</h3><p>1.键盘事件：<br>onkeydown 键盘按下<br>onkeyup 键盘抬起<br>onkeypress 键盘按下<br>2.鼠标事件：<br><strong>注意：out和over会在鼠标从父级移入子级的时候触发，而enter和leave只有在移入和移出子级整体的时候触发</strong><br>onmoveover 鼠标移入<br>onmouseout 鼠标移出<br>onmouseenter 鼠标移入<br>onmouseleave 鼠标移出<br>onmousedown 鼠标按下<br>onmouseup 鼠标抬起<br>ondblclick 鼠标双击<br>oncontextmenu 鼠标右键<br>3.表单事件：<br>onsubmit 表单提交：点击的是提交按钮，form表单触发onsubmit<br>onreset 表单重置<br>onfocus 获取焦点<br>__注意：一些事件中，系统会有默认事件触发，比如右键的时候会弹出来菜单，比如按了提交按钮跳转网页。这些都是默认事件。默认事件可以被阻止<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">return false;</div></pre></td></tr></table></figure></p>
+<p>4.移动端事件<br>ontouchstart 相当于鼠标按下onmousedown<br>ontouchmove 相当于鼠标移动onmousemove<br>ontouchend 等价于 鼠标抬起onmouseup</p>
+<h3 id="二：事件对象"><a href="#二：事件对象" class="headerlink" title="二：事件对象"></a>二：事件对象</h3><p>以keydown为例<br><strong>注意:keydown支持特殊按键，如：command shift 但不区分大小写 A 和 a 的keyCode都是65;  keypress不支持特殊按键,keyCode区分大小写</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">document.onkeydown = function(ev)&#123;</div><div class="line">        // 获取事件对象可以使用window.event，注意：在火狐或取不到	</div><div class="line">		// 在火狐需要通过参数获取</div><div class="line">		// 兼容写法</div><div class="line">		var evObj = window.event || ev;</div><div class="line">		console.log(evObj.keyCode);</div><div class="line">		// 如何判断是否按了组合键</div><div class="line">		if(evObj.keyCode == 67 &amp;&amp; evObj.metaKey)&#123;</div><div class="line">				console.log(&quot;按了command + c&quot;);</div><div class="line">			&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>1.evObj.keyCode 每个按键对应一个数字编码<br>2.evObj.target 触发了事件的元素，触发事件的元素不一定是绑定事件的元素<br>3.evObj.offsetX/Y 鼠标距离自身的距离<br>4.evObj.clientX/Y 鼠标距离屏幕的距离<br>5.evObj.pageX/Y 鼠标距离页面的距离</p>
+<h3 id="三：事件绑定"><a href="#三：事件绑定" class="headerlink" title="三：事件绑定"></a>三：事件绑定</h3><p>第一种就是上面例子代码，但第一种不能绑定多个事件；而下面的这种可以绑定多个事件。<br>1.非IE绑定事件的方法<br><strong>格式: 元素.addEventListener(“不包含on的事件名”,时间对应的函数,是否在铺获阶段触发false这或者true);</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redDiv.addEventListener(&quot;click&quot;,function()&#123;</div><div class="line"> 	console.log(&quot;2&quot;);</div><div class="line"> &#125;,false);</div></pre></td></tr></table></figure></p>
+<p>2.IE绑定事件的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">redDiv.attachEvent(&quot;click&quot;,function()&#123;</div><div class="line"> 	console.log(&quot;2&quot;);</div><div class="line"> &#125;,false);</div></pre></td></tr></table></figure></p>
+<p>3.兼容写法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">**** 参数：</div><div class="line">****	element:代表要绑定的事件</div><div class="line">****	type:要绑定的事件名(不含on)</div><div class="line">****	fn:要绑定的事件对应的函数</div><div class="line">function addEvent(element,type,fn)&#123;</div><div class="line">		if(element.addEventListener)&#123;</div><div class="line">			element.addEventListener(type,fn,false);</div><div class="line">		&#125;else if(element.attachEvent)&#123;</div><div class="line">			element.attachEvent(&quot;on&quot; + type,fn);</div><div class="line">		&#125;else&#123;</div><div class="line">			element[&quot;on&quot; + type]= fn;</div><div class="line">		&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cj8x5msl5000106ayqae7wds8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/10/13/函数闭包/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">函数闭包</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/10/18/浅谈js事件/">浅谈js事件</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/13/函数闭包/">函数闭包</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/13/渐变/">渐变</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/11/flex/">flex</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/11/第一篇记录/">第一篇记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 李田田<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
