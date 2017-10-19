@@ -69,6 +69,70 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-gulp自动化构建工具" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/10/19/gulp自动化构建工具/" class="article-date">
+  <time datetime="2017-10-19T14:03:02.000Z" itemprop="datePublished">2017-10-19</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/19/gulp自动化构建工具/">gulp自动化构建工具</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>一步一步教你构建gulp，前端大白都能看懂。。。以下是具体步骤：<br>1.打开终端 mkdir创建一个项目目录one (不能叫gulp)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir one</div></pre></td></tr></table></figure></p>
+<p>2.通过终端cd 命令进入 该项目目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cd one</div></pre></td></tr></table></figure></p>
+<p>3.执行npm init命令 初始化该目录，并生成package.json文件<br>（此处需要一直按回车）直到生成package.json<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm init</div></pre></td></tr></table></figure></p>
+<p>如图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426634-b4742ad4946dee98.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="E24105FD-CE57-4190-B0D5-750E955C2466.png"></p>
+<p>###以下几项是安装几个平常所需要的插件<br><strong>–save-dev 是你开发时候依赖的东西，它会自动把你安装的插件的版本号信息写到你的json文件中</strong>,在安装是如果报错是权限不足时，在命令语句钱加<strong>sudo</strong>,表示使用管理员身份运行就如windows系统里的administrater,命令如下：<br>4.安装gulp,生成node_modules文件夹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp --save-dev</div></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426634-218bd0fd38e7106a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="2.png"></p>
+<p>5.安装less插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-less --save-dev</div></pre></td></tr></table></figure></p>
+<p>6.安装pug插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-pug --save-dev</div></pre></td></tr></table></figure></p>
+<p>7.安装出错不中断监控插件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-plumber --save-dev</div></pre></td></tr></table></figure></p>
+<p>8.安装css压缩插件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-clean-css --save-dev</div></pre></td></tr></table></figure>
+<p>当前目录下会生成node_moudles 检查有没有上面安装的插件，并检查<br>package.json文件里有没有这些插件的信息，保存成功没有，里面有安装的插件名称和对应的版本号。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426634-6a3d2e39b0313f51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="4.png"></p>
+<p>9.通过touch.js命令 生成创建gulpfile.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">touch gulpfile.js</div></pre></td></tr></table></figure></p>
+<p>10.通过mkdir 创建pug目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir pug</div></pre></td></tr></table></figure></p>
+<p>11.通过mkdir 创建less目录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mkdir</div></pre></td></tr></table></figure></p>
+<p>12.编辑 gulpfile.js,注意lass和pug文件的位置写对应的路径</p>
+<p>###部分代码的语义：<br><strong>gulp.task(“任务名称”,function(){<br>    要做的事情<br>})<br>gulp.src(“文件的路径，相对的”)<br>pipe(“管道，输出到下一步”)<br>gulp.dest(“文件输出的路径，相对的”)<br>gulp.watch(“你监控的文件路径，相对的”,[“任务名称1”,”任务名称2”])</strong></p>
+<p>###主要任务的逻辑<br>以1hao任务为例：</p>
+<ol>
+<li>找到pug文件</li>
+<li>编译pug文件成html</li>
+<li>把html放在另外一个目录下</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">// 引入gulp</div><div class="line">var gulp = require(&quot;gulp&quot;);</div><div class="line">// 引入pug插件</div><div class="line">var pug = require(&quot;gulp-pug&quot;);</div><div class="line">// 引入less插件</div><div class="line">var less = require(&quot;gulp-less&quot;);</div><div class="line">// 引入plumber出错不中断监控插件</div><div class="line">var plumber = require(&quot;gulp-plumber&quot;);</div><div class="line">// 引入clean-css css压缩插件</div><div class="line">var cleanCss = require(&quot;gulp-clean-css&quot;);</div><div class="line"></div><div class="line">// gulp.task定义任务</div><div class="line">gulp.task(&quot;1hao&quot;,function()&#123;</div><div class="line">	// gulp.src 文件位置</div><div class="line">	gulp.src(&quot;pug/*.pug&quot;)</div><div class="line">		.pipe(plumber())</div><div class="line">		.pipe(pug())//pug -&gt; html</div><div class="line">		.pipe(gulp.dest(&quot;html/&quot;));</div><div class="line">&#125;)</div><div class="line">gulp.task(&quot;2hao&quot;,function()&#123;</div><div class="line">	gulp.src(&quot;less/*.less&quot;)</div><div class="line">		.pipe(plumber())</div><div class="line">		.pipe(less())//less -&gt; css</div><div class="line">		.pipe(cleanCss())</div><div class="line">		.pipe(gulp.dest(&quot;css/&quot;))</div><div class="line">&#125;)</div><div class="line">gulp.task(&quot;3hao&quot;,function()&#123;</div><div class="line">	gulp.watch(&quot;pug/*.pug&quot;,[&quot;1hao&quot;])</div><div class="line">	gulp.watch(&quot;less/*.less&quot;,[&quot;2hao&quot;])</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>进行到这一步，整个工具已经生成。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426634-8ec6995e1fcd04aa.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="5.png"><br>下次你要写项目时直接拿来用，在终端运行gulp,并调用对应的任务便可愉快的编写代码了，是不是特别方便呀~~~~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/10/19/gulp自动化构建工具/" data-id="cj8yjg5vt0000v2aywmpn2l47" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-浅谈js事件" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/10/18/浅谈js事件/" class="article-date">
@@ -102,7 +166,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cj8x5msl5000106ayqae7wds8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cj8yjg5w40002v2ay63mgzegf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -148,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cj8x5mskz000006aybgxefhbk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cj8yjg5vz0001v2ay956gef1m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -195,7 +259,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cj8x5msla000206ay1ff5qn6s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cj8yjg5w70003v2ay3p0e3th8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -289,7 +353,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj8x5mslj000506ayin6neez9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj8yjg5wr0006v2ay5acxai1z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -326,7 +390,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj8x5msld000306aypdkswyd3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj8yjg5w80004v2ay18664k0r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -371,7 +435,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj8x5mslg000406ay4yxyf0x6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj8yjg5wc0005v2ay737zxrg0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -411,6 +475,10 @@
       <ul>
         
           <li>
+            <a href="/2017/10/19/gulp自动化构建工具/">gulp自动化构建工具</a>
+          </li>
+        
+          <li>
             <a href="/2017/10/18/浅谈js事件/">浅谈js事件</a>
           </li>
         
@@ -424,10 +492,6 @@
         
           <li>
             <a href="/2017/09/11/flex/">flex</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/11/第一篇记录/">第一篇记录</a>
           </li>
         
       </ul>
