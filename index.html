@@ -69,6 +69,52 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-js模拟数组对象方法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/16/js模拟数组对象方法/" class="article-date">
+  <time datetime="2017-11-16T13:45:01.000Z" itemprop="datePublished">2017-11-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/16/js模拟数组对象方法/">js模拟数组对象方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>数组对象是js类库中自带的，我们使用时直接调用对象的方法就可以了，但是我们也能自己写代码模拟这些方法，一个牛掰的程序员是可以自己写一个类库，他自己的需求写入其中，好佩服这一类人，我这大白离这水平自然是差了 N多个等级，不过可以慢慢的练，从模拟一些系统自带的对象方法做起。。。</p>
+<p>在这之前先说两个将会用到的知识点：<br><strong>1.prototype 可以给某个类添加属性或方法</strong><br><strong>2.arguments:参数列表,调用的时候写了多少个参数，arguments就有几个元素。arguments是所有参数组成的数组</strong></p>
+<p>接下来给大家分享几个仿写数组对象的方法：</p>
+<h4 id="1-push-向数组的末尾添加一个或更多元素，并返回新的长度"><a href="#1-push-向数组的末尾添加一个或更多元素，并返回新的长度" class="headerlink" title="1.push     向数组的末尾添加一个或更多元素，并返回新的长度"></a>1.push     向数组的末尾添加一个或更多元素，并返回新的长度</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Array.prototype.myPop = function()&#123;</div><div class="line">		var res = this[this.length - 1];</div><div class="line">		this.length = this.length - 1;</div><div class="line">		return res;</div><div class="line">	&#125;</div><div class="line">	console.log(a.myPop(),a);</div></pre></td></tr></table></figure>
+<h4 id="2-reverse-颠倒数组中元素的顺序"><a href="#2-reverse-颠倒数组中元素的顺序" class="headerlink" title="2.reverse     颠倒数组中元素的顺序"></a>2.reverse     颠倒数组中元素的顺序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Array.prototype.myReverse = function()&#123;</div><div class="line">		for(var i = 0; i &lt; parseInt(this.length/2); i++)&#123;</div><div class="line">			var temp = this[i] ;</div><div class="line">			this[i] = this[this.length - 1 -i];</div><div class="line">			this[this.length - 1 -i] = temp;</div><div class="line">		&#125;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h4 id="3-nushift-向数组的开头添加一个或更多元素，并返回新的长度"><a href="#3-nushift-向数组的开头添加一个或更多元素，并返回新的长度" class="headerlink" title="3.nushift 向数组的开头添加一个或更多元素，并返回新的长度"></a>3.nushift 向数组的开头添加一个或更多元素，并返回新的长度</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Array.prototype.myUnshift = function()&#123;</div><div class="line">		this.myReverse();    //调用前面自己写的myReverse方法</div><div class="line">		for(var i = arguments.length - 1; i &gt;= 0;i--)&#123;</div><div class="line">			this.myPush(arguments[i]);  //调用前面自己写的myPush方法</div><div class="line">		&#125;</div><div class="line">		this.myReverse();</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h4 id="4-shift-删除并返回数组的第一个元素"><a href="#4-shift-删除并返回数组的第一个元素" class="headerlink" title="4.shift 删除并返回数组的第一个元素"></a>4.shift 删除并返回数组的第一个元素</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Array.prototype.myShift = function()&#123;</div><div class="line">		this.myReverse();</div><div class="line">		var res = this.myPop();</div><div class="line">		this.myReverse();</div><div class="line">		return res;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<h4 id="5-join-把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔"><a href="#5-join-把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔" class="headerlink" title="5.join 把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔"></a>5.join 把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">Array.prototype.myJoin = function(str)&#123;</div><div class="line">		if(str === undefined)&#123;</div><div class="line">			str = &quot;,&quot;;    //传入的参数为空时用逗号隔开</div><div class="line">		&#125;</div><div class="line">		var all = &quot;&quot;;</div><div class="line">		for(var i = 0; i &lt; this.length - 1;i++)&#123;</div><div class="line">			all = all + this[i] +str;</div><div class="line">		&#125;</div><div class="line">		all  += this[this.length - 1];</div><div class="line">		return all;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="6-splice-删除元素，并向数组添加新元素（此方法功能较多，比上面复杂一点，大家可以看注释）"><a href="#6-splice-删除元素，并向数组添加新元素（此方法功能较多，比上面复杂一点，大家可以看注释）" class="headerlink" title="6 splice 删除元素，并向数组添加新元素（此方法功能较多，比上面复杂一点，大家可以看注释）"></a>6 splice 删除元素，并向数组添加新元素（此方法功能较多，比上面复杂一点，大家可以看注释）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">Array.prototype.mySplice = function(index,length)&#123;</div><div class="line">		var arr = []; // 存放拼接的新数组</div><div class="line">		var resArr = []; // 作为返回值返回</div><div class="line">		// 把index-length范围的数组做成数组，作为mySplice的返回值</div><div class="line">		for(var i = index; i &lt; index + length ;i++)&#123;</div><div class="line">			resArr.myPush(this[i]);</div><div class="line">		&#125;</div><div class="line">		// 拼接新的数组分为三部分</div><div class="line">		// 1.范围之前，index之前</div><div class="line">		for(var i = 0; i &lt; index; i++)&#123;</div><div class="line">			arr.myPush(this[i]);</div><div class="line">		&#125;</div><div class="line">		// 2.参数列表里面下标2（包括2）之后的参数</div><div class="line">		for(var i = 2; i &lt; arguments.length; i++)&#123;</div><div class="line">			arr.myPush(arguments[i]);</div><div class="line">		&#125;</div><div class="line">		// 3.范围之后，index+length开始，到最后一个</div><div class="line">		for(var i = index + length;i &lt; this.length;i++)&#123;</div><div class="line">			arr.myPush(this[i]);</div><div class="line">		&#125;</div><div class="line">		// arr 新数组赋值给this this不能被赋值</div><div class="line">		this.length = 0;</div><div class="line">		for(var i = 0; i &lt; arr.length; i++)&#123;</div><div class="line">			this[i] = arr[i];</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		return resArr;</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+<p>这是几个数组常用的方法，其他方法有兴趣的也可以自己总结，还有字符串对象的方法跟数组的方法也相似，我整理了一部分，鉴于有些方法的功能的没实现，就不分享了，由于技术没到火候，现在有些方法整理的比较吃力， 大家若是写了欢迎跟我分享。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/16/js模拟数组对象方法/" data-id="cja2j4dgu0005k0aya4j88e2d" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-php基础语法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/13/php基础语法/" class="article-date">
@@ -198,7 +244,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/php基础语法/" data-id="cj9y76up60004dbayasiymtqr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/php基础语法/" data-id="cja2j4dge0001k0ayd6eivrya" class="article-share-link">Share</a>
       
       
     </footer>
@@ -265,7 +311,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/php文件上传/" data-id="cj9y76up40003dbay9gdjx4i2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/php文件上传/" data-id="cja2j4dhr0009k0ayza18lcug" class="article-share-link">Share</a>
       
       
     </footer>
@@ -329,7 +375,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/19/gulp自动化构建工具/" data-id="cj9y76up20002dbayn8i82qcx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/19/gulp自动化构建工具/" data-id="cja2j4dgo0004k0aywrsntdx0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -372,7 +418,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cj9y76upc0006dbay1w9h76lj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cja2j4dgw0006k0ay9b0n11j1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -418,7 +464,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cj9y76up90005dbayr260h7vz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cja2j4dgk0002k0aymzp3gyda" class="article-share-link">Share</a>
       
       
     </footer>
@@ -465,7 +511,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cj9y76upi0008dbayuc8snao1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cja2j4dhn0008k0ay1lg6uz4g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -559,7 +605,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cj9y76uoq0000dbay7w8hcxwu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cja2j4dg60000k0ay8qm6i5d4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -596,7 +642,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cj9y76upd0007dbayazo9aktk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cja2j4dgy0007k0aykbhm0qnj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -641,7 +687,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cj9y76uov0001dbay1bae6wpx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cja2j4dgm0003k0aydfozud72" class="article-share-link">Share</a>
       
       
     </footer>
@@ -681,6 +727,10 @@ echo $a;
       <ul>
         
           <li>
+            <a href="/2017/11/16/js模拟数组对象方法/">js模拟数组对象方法</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/13/php基础语法/">php基础语法</a>
           </li>
         
@@ -694,10 +744,6 @@ echo $a;
         
           <li>
             <a href="/2017/10/18/浅谈js事件/">浅谈js事件</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/13/函数闭包/">函数闭包</a>
           </li>
         
       </ul>
