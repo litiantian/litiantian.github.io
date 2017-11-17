@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>json与jsonp的区别 | 马大哈tt</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="其实json和jsonp本质上都是字符串，只是jsonp是外层包裹了一层函数。 json下面是jquery的ajax请求，数据类型为json,它是以json格式在前后台进行数据的传输，它与局限性就是不能跨域请求，这是为了网络数据的安全所制定的规则。123456789101112131415$.ajax(&amp;#123;			type: &amp;quot;post&amp;quot;, // 数据提交类型			url">
+<meta property="og:type" content="article">
+<meta property="og:title" content="json与jsonp的区别">
+<meta property="og:url" content="http://yoursite.com/2017/11/17/json与jsonp的区别/index.html">
+<meta property="og:site_name" content="马大哈tt">
+<meta property="og:description" content="其实json和jsonp本质上都是字符串，只是jsonp是外层包裹了一层函数。 json下面是jquery的ajax请求，数据类型为json,它是以json格式在前后台进行数据的传输，它与局限性就是不能跨域请求，这是为了网络数据的安全所制定的规则。123456789101112131415$.ajax(&amp;#123;			type: &amp;quot;post&amp;quot;, // 数据提交类型			url">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-17T12:41:40.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="json与jsonp的区别">
+<meta name="twitter:description" content="其实json和jsonp本质上都是字符串，只是jsonp是外层包裹了一层函数。 json下面是jquery的ajax请求，数据类型为json,它是以json格式在前后台进行数据的传输，它与局限性就是不能跨域请求，这是为了网络数据的安全所制定的规则。123456789101112131415$.ajax(&amp;#123;			type: &amp;quot;post&amp;quot;, // 数据提交类型			url">
+  
+    <link rel="alternate" href="/atom.xml" title="马大哈tt" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">马大哈tt</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">记录生活点滴</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-json与jsonp的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/17/json与jsonp的区别/" class="article-date">
+  <time datetime="2017-11-17T12:41:32.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      json与jsonp的区别
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>其实json和jsonp本质上都是字符串，只是jsonp是外层包裹了一层函数。</p>
+<h4 id="json"><a href="#json" class="headerlink" title="json"></a>json</h4><p>下面是jquery的ajax请求，数据类型为json,它是以json格式在前后台进行数据的传输，它与局限性就是不能跨域请求，这是为了网络数据的安全所制定的规则。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">			type: &quot;post&quot;, // 数据提交类型</div><div class="line">			url: &quot;danmu.php&quot;,// 请求地址 同源服务器/浏览器安全设置</div><div class="line">			data: &#123;word:&quot;abc&quot;,username:&quot;ltt&quot;&#125;, // 发送数据</div><div class="line">			dataType: &quot;json&quot;, // 返回数据的类型</div><div class="line">			async: true, // 是否异步，true为异步</div><div class="line">			// success为数据加载完成后的回调函数</div><div class="line">			success: function(data)&#123;</div><div class="line">				var show = document.getElementById(&apos;show&apos;);</div><div class="line">				for(i in data)&#123;</div><div class="line">					show.innerHTML += data[i]+&quot;&lt;br&gt;&quot;;</div><div class="line">				&#125;</div><div class="line">				console.log(data);</div><div class="line">			&#125;		</div><div class="line">		&#125;);</div></pre></td></tr></table></figure></p>
+<p>这是后台部分，首先判断前台是否请求数据，如果请求了，就将前台需要的数据返回给前台。<br><strong>注意：返回给前台的数据一定要转成json格式的，通过json_encode将数组转换成json格式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	if(!empty($_POST[&apos;word&apos;]))&#123;</div><div class="line">		$arr = [];</div><div class="line">		$word = htmlspecialchars($_POST[&apos;word&apos;]);</div><div class="line">		$username = htmlspecialchars($_POST[&apos;username&apos;]);</div><div class="line">		$arr[] = $word;</div><div class="line">		$arr[] = $username;</div><div class="line">		$fp = fopen(&quot;danmu.txt&quot;,&quot;a+&quot;);</div><div class="line">		fwrite($fp,$word.&quot;\n&quot;);</div><div class="line">		fclose($fp);</div><div class="line">		echo json_encode(array($word));</div><div class="line">	&#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<p>由于json不能跨域请求，于是就有了jsonp</p>
+<h4 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h4><p>大家都知道script标签是可以跨域请求的，jsonp的原理就是通过script的src，将函数作为src请求地址的参数来传递数据，所以jsonp只有get一种传输方式。<br>下面是jsonp的数据交互，首先定义一个回调函数，定义dataType类型为jsonp,将函数作为参数传输给后台，它与json相比是多了一层函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">		// 自定义的回调函数</div><div class="line">		function show(val)&#123;</div><div class="line">			document.getElementById(&quot;show&quot;).src=val[0].src;</div><div class="line">		&#125;</div><div class="line">		$.ajax(&#123;</div><div class="line">			type:&quot;get&quot;,</div><div class="line">			url:&quot;myphp.php&quot;,</div><div class="line">			dataType:&quot;jsonp&quot;, // 现在时jsonp请求，这个时候，jquery使用的是script标签发送请求</div><div class="line">			jsonp:&quot;callmyphp&quot;, // 后台用来接受函数名的变量名</div><div class="line">			jsonpCallback:&quot;show&quot;,// 自定义的回调函数名</div><div class="line">			async:true,</div><div class="line">		&#125;);</div></pre></td></tr></table></figure>
+<p>至于什么时候用json什么时候用jsonp？我就一个原则，能使用json的时候都是用json，只有必须要跨域请求时才使用jsonp。</p>
+<p>参考文章：<a href="https://www.cnblogs.com/iovec/p/5312464.html" target="_blank" rel="external">https://www.cnblogs.com/iovec/p/5312464.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/17/json与jsonp的区别/" data-id="cja3w9cip0000e9ays2srn0wa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/16/js模拟数组对象方法/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">js模拟数组对象方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/17/json与jsonp的区别/">json与jsonp的区别</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/16/js模拟数组对象方法/">js模拟数组对象方法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/13/php基础语法/">php基础语法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/13/php文件上传/">php文件上传</a>
+          </li>
+        
+          <li>
+            <a href="/2017/10/19/gulp自动化构建工具/">gulp自动化构建工具</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 李田田<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -69,6 +69,51 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-json与jsonp的区别" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/17/json与jsonp的区别/" class="article-date">
+  <time datetime="2017-11-17T12:41:32.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/17/json与jsonp的区别/">json与jsonp的区别</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>其实json和jsonp本质上都是字符串，只是jsonp是外层包裹了一层函数。</p>
+<h4 id="json"><a href="#json" class="headerlink" title="json"></a>json</h4><p>下面是jquery的ajax请求，数据类型为json,它是以json格式在前后台进行数据的传输，它与局限性就是不能跨域请求，这是为了网络数据的安全所制定的规则。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;</div><div class="line">			type: &quot;post&quot;, // 数据提交类型</div><div class="line">			url: &quot;danmu.php&quot;,// 请求地址 同源服务器/浏览器安全设置</div><div class="line">			data: &#123;word:&quot;abc&quot;,username:&quot;ltt&quot;&#125;, // 发送数据</div><div class="line">			dataType: &quot;json&quot;, // 返回数据的类型</div><div class="line">			async: true, // 是否异步，true为异步</div><div class="line">			// success为数据加载完成后的回调函数</div><div class="line">			success: function(data)&#123;</div><div class="line">				var show = document.getElementById(&apos;show&apos;);</div><div class="line">				for(i in data)&#123;</div><div class="line">					show.innerHTML += data[i]+&quot;&lt;br&gt;&quot;;</div><div class="line">				&#125;</div><div class="line">				console.log(data);</div><div class="line">			&#125;		</div><div class="line">		&#125;);</div></pre></td></tr></table></figure></p>
+<p>这是后台部分，首先判断前台是否请求数据，如果请求了，就将前台需要的数据返回给前台。<br><strong>注意：返回给前台的数据一定要转成json格式的，通过json_encode将数组转换成json格式</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">	if(!empty($_POST[&apos;word&apos;]))&#123;</div><div class="line">		$arr = [];</div><div class="line">		$word = htmlspecialchars($_POST[&apos;word&apos;]);</div><div class="line">		$username = htmlspecialchars($_POST[&apos;username&apos;]);</div><div class="line">		$arr[] = $word;</div><div class="line">		$arr[] = $username;</div><div class="line">		$fp = fopen(&quot;danmu.txt&quot;,&quot;a+&quot;);</div><div class="line">		fwrite($fp,$word.&quot;\n&quot;);</div><div class="line">		fclose($fp);</div><div class="line">		echo json_encode(array($word));</div><div class="line">	&#125;</div><div class="line">?&gt;</div></pre></td></tr></table></figure>
+<p>由于json不能跨域请求，于是就有了jsonp</p>
+<h4 id="jsonp"><a href="#jsonp" class="headerlink" title="jsonp"></a>jsonp</h4><p>大家都知道script标签是可以跨域请求的，jsonp的原理就是通过script的src，将函数作为src请求地址的参数来传递数据，所以jsonp只有get一种传输方式。<br>下面是jsonp的数据交互，首先定义一个回调函数，定义dataType类型为jsonp,将函数作为参数传输给后台，它与json相比是多了一层函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;script type=&quot;text/javascript&quot;&gt;</div><div class="line">		// 自定义的回调函数</div><div class="line">		function show(val)&#123;</div><div class="line">			document.getElementById(&quot;show&quot;).src=val[0].src;</div><div class="line">		&#125;</div><div class="line">		$.ajax(&#123;</div><div class="line">			type:&quot;get&quot;,</div><div class="line">			url:&quot;myphp.php&quot;,</div><div class="line">			dataType:&quot;jsonp&quot;, // 现在时jsonp请求，这个时候，jquery使用的是script标签发送请求</div><div class="line">			jsonp:&quot;callmyphp&quot;, // 后台用来接受函数名的变量名</div><div class="line">			jsonpCallback:&quot;show&quot;,// 自定义的回调函数名</div><div class="line">			async:true,</div><div class="line">		&#125;);</div></pre></td></tr></table></figure>
+<p>至于什么时候用json什么时候用jsonp？我就一个原则，能使用json的时候都是用json，只有必须要跨域请求时才使用jsonp。</p>
+<p>参考文章：<a href="https://www.cnblogs.com/iovec/p/5312464.html" target="_blank" rel="external">https://www.cnblogs.com/iovec/p/5312464.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/17/json与jsonp的区别/" data-id="cja3w9cip0000e9ays2srn0wa" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-js模拟数组对象方法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/16/js模拟数组对象方法/" class="article-date">
@@ -105,7 +150,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/16/js模拟数组对象方法/" data-id="cja2jrh9z0003buayfrthc594" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/16/js模拟数组对象方法/" data-id="cja3w9cjk0006e9ay4xv4dxky" class="article-share-link">Share</a>
       
       
     </footer>
@@ -244,7 +289,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/php基础语法/" data-id="cja2jrh9t0001buayhffw0pyk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/php基础语法/" data-id="cja3w9cj10002e9ay9fpaqqm7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -311,7 +356,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/php文件上传/" data-id="cja2jrhb50007buayjyimwxia" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/php文件上传/" data-id="cja3w9cjz000ae9ay0aew5lbw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -375,7 +420,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/19/gulp自动化构建工具/" data-id="cja2jrh9m0000buay5fxfwsh9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/19/gulp自动化构建工具/" data-id="cja3w9ciw0001e9ay9jbywjkm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -418,7 +463,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cja2jrhb10006buay8ef7ew6y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cja3w9cjs0007e9ayfic35e52" class="article-share-link">Share</a>
       
       
     </footer>
@@ -464,7 +509,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cja2jrhay0005buayoh7vsjng" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cja3w9cj60004e9ayga8mqjh6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -511,7 +556,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cja2jrhbr0009buayqgzhwp4v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cja3w9cjy0009e9aylmskk9y9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -605,7 +650,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cja2jrh9x0002buayvvgjipr1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cja3w9cj30003e9ayvv06r2gn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -642,52 +687,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cja2jrhb80008buaydcmlu8yj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/11/hello-world/" class="article-date">
-  <time datetime="2017-09-11T08:25:37.000Z" itemprop="datePublished">2017-09-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/hello-world/" data-id="cja2jrha80004buayktgx3nc2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cja3w9cjv0008e9aye71kgky5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -698,6 +698,10 @@ echo $a;
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -727,6 +731,10 @@ echo $a;
       <ul>
         
           <li>
+            <a href="/2017/11/17/json与jsonp的区别/">json与jsonp的区别</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/16/js模拟数组对象方法/">js模拟数组对象方法</a>
           </li>
         
@@ -740,10 +748,6 @@ echo $a;
         
           <li>
             <a href="/2017/10/19/gulp自动化构建工具/">gulp自动化构建工具</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/18/浅谈js事件/">浅谈js事件</a>
           </li>
         
       </ul>
