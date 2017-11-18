@@ -69,6 +69,122 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-前后台交互" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/18/前后台交互/" class="article-date">
+  <time datetime="2017-11-18T09:07:44.000Z" itemprop="datePublished">2017-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/18/前后台交互/">前后台交互</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h5 id="今天小姐姐不分享代码，来谈谈我对前后台交互的认知。"><a href="#今天小姐姐不分享代码，来谈谈我对前后台交互的认知。" class="headerlink" title="今天小姐姐不分享代码，来谈谈我对前后台交互的认知。"></a>今天小姐姐不分享代码，来谈谈我对前后台交互的认知。</h5><p>在web开发中，前后台交互是一个至关重要的环节，前后台需要及时沟通，工作才能顺利进行，有时候就是因为沟通不够，然后造成许多白用功。不过，对于刚接触前端开发的小白来说，前后端交互的概念很模糊，不过不必紧张，经过几个项目之后，就会好的。</p>
+<h3 id="php-前后台交互"><a href="#php-前后台交互" class="headerlink" title="php + 前后台交互"></a>php + 前后台交互</h3><p>首先，我们的明白服务器的概念</p>
+<h4 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h4><p>什么是服务器？分为四大块：</p>
+<blockquote>
+<p>1.硬件：它是一台主机，基于三种主流的操作系统：windows、mac OS、UNIX/LINUX.</p>
+<p>2.软件：支持服务，支持软件的<br>它的服务类型分为三种：</p>
+<ul>
+<li>FTP:提供文件上传下载的服务器，可以称为文件服务器</li>
+<li>HTPP/HTPPS:提供web服务的服务器，支持的软件有Ningx和Apache</li>
+<li>mySQL:提供Mysql数据库服务的服务器</li>
+</ul>
+<p>3.联网：服务器需要通过网络连接，为外界提供服务</p>
+<ol>
+<li>后台语言环境的支持：如：js 、java、 php(使用最广泛的编程语言)、Python</li>
+</ol>
+<p>web服务器的配置：首先建立网站根目录，使用后台语言编译。</p>
+</blockquote>
+<h4 id="前后台交互"><a href="#前后台交互" class="headerlink" title="前后台交互"></a>前后台交互</h4><h5 id="一、-服务器端主要完成的功能"><a href="#一、-服务器端主要完成的功能" class="headerlink" title="一、 服务器端主要完成的功能"></a>一、 服务器端主要完成的功能</h5><blockquote>
+<ol>
+<li>接受前台提交的数据</li>
+<li>对前台提交的数据进行处理</li>
+<li>服务器向前端返回数据</li>
+<li>存储数据</li>
+</ol>
+</blockquote>
+<h5 id="二、数据传送方式"><a href="#二、数据传送方式" class="headerlink" title="二、数据传送方式"></a>二、数据传送方式</h5><blockquote>
+<ol>
+<li>get方式：</li>
+</ol>
+<ul>
+<li>不安全；</li>
+<li>get数据有限制；</li>
+<li>get是通过url提交数据?参数</li>
+</ul>
+<ol>
+<li>post方式：</li>
+</ol>
+<ul>
+<li>post数据理论上没有限制</li>
+<li>post数据是在http请求头的主体部分发送的</li>
+<li>相对安全</li>
+</ul>
+</blockquote>
+<h5 id="三、数据提交方式"><a href="#三、数据提交方式" class="headerlink" title="三、数据提交方式"></a>三、数据提交方式</h5><p> <strong>1. 在链接地址上使用?提交 ， 只有get一种传送方式。</strong></p>
+<p><strong>2. form表单方式</strong></p>
+<blockquote>
+<ul>
+<li>可以实现POST与GET两种数据传送方式</li>
+<li>可以跨域提交数据</li>
+<li>使用iframe方式实现局部刷新（iframe）不支持跨域</li>
+</ul>
+<p><strong>3. 通过script标签的src属性</strong></p>
+<ul>
+<li>只能使用get方式</li>
+<li>独立的实现局部刷新</li>
+<li>支持跨域</li>
+<li>JSON与JSONP  他们的详细介绍在我的上一篇博客里已经说过，这里就不重复了，想要了解的可以点击：<a href="http://www.jianshu.com/p/f46dd756873e" target="_blank" rel="external">http://www.jianshu.com/p/f46dd756873e</a></li>
+</ul>
+</blockquote>
+<p><strong>4 .XHR对象，XMLHttpRequest</strong></p>
+<blockquote>
+<ul>
+<li>创建对象： var xhr = new XMLHttpRequset();</li>
+<li>方法：xhr.open(); 三个参数(GET/POST,url,同步|异步)</li>
+<li>事件：onreadyStateChange: 当XHR状态发生变化的时候会执行<br>onload: 数据接收完毕互执行</li>
+<li>属性：responseText : 服务器返回的数据<br>readyState XHR的执行状态，有五种状态：<blockquote>
+<p> 0 - 初识状态<br>1 - 创建链接<br>2 - 发送数据<br>3 - 服务器开始返回数据<br> 4 - 数据接受完毕</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>5. FormData 模拟表单提交</strong><br>创建表单对象：var formData = new FromData();<br>添加数据方法： append</p>
+<p><strong>6. jquery Ajax封装</strong><br>常用的四种方法：</p>
+<ol>
+<li>$.ajax()</li>
+<li>$load()</li>
+<li>$get()</li>
+<li>post()<br>具体用法大家可以查手册，这里就不过多介绍了。</li>
+</ol>
+</blockquote>
+<p>  还有数据库的一些知识还没分享，后续会分享的，欢迎关注，哈哈哈哈哈哈~~~~</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/18/前后台交互/" data-id="cja5428da0005koay8ic5e6r4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-json与jsonp的区别" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/17/json与jsonp的区别/" class="article-date">
@@ -104,7 +220,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/17/json与jsonp的区别/" data-id="cja3w9cip0000e9ays2srn0wa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/17/json与jsonp的区别/" data-id="cja5428d30003koay6fw59mgs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/16/js模拟数组对象方法/" data-id="cja3w9cjk0006e9ay4xv4dxky" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/16/js模拟数组对象方法/" data-id="cja5428d00002koaymszqef4p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -289,7 +405,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/php基础语法/" data-id="cja3w9cj10002e9ay9fpaqqm7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/php基础语法/" data-id="cja5428dj0008koay75yvbf2c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -356,7 +472,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/php文件上传/" data-id="cja3w9cjz000ae9ay0aew5lbw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/php文件上传/" data-id="cja5428d50004koaypksr5j16" class="article-share-link">Share</a>
       
       
     </footer>
@@ -420,7 +536,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/19/gulp自动化构建工具/" data-id="cja3w9ciw0001e9ay9jbywjkm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/19/gulp自动化构建工具/" data-id="cja5428cv0001koay2qtrfm5f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -463,7 +579,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cja3w9cjs0007e9ayfic35e52" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/18/浅谈js事件/" data-id="cja5428dm0009koayotl3ac3h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -509,7 +625,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cja3w9cj60004e9ayga8mqjh6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/10/13/函数闭包/" data-id="cja5428de0007koay6hcyc565" class="article-share-link">Share</a>
       
       
     </footer>
@@ -556,7 +672,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cja3w9cjy0009e9aylmskk9y9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/13/渐变/" data-id="cja5428dq000bkoaynfoalo33" class="article-share-link">Share</a>
       
       
     </footer>
@@ -650,44 +766,7 @@ echo $a;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cja3w9cj30003e9ayvv06r2gn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-第一篇记录" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/09/11/第一篇记录/" class="article-date">
-  <time datetime="2017-09-11T08:54:47.000Z" itemprop="datePublished">2017-09-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/09/11/第一篇记录/">第一篇记录</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="博客生涯开始了"><a href="#博客生涯开始了" class="headerlink" title="博客生涯开始了"></a>博客生涯开始了</h2><p>今天好开心啊，啦啦啦啦</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/09/11/第一篇记录/" data-id="cja3w9cjv0008e9aye71kgky5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/09/11/flex/" data-id="cja5428cp0000koayu8mm169q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -731,6 +810,10 @@ echo $a;
       <ul>
         
           <li>
+            <a href="/2017/11/18/前后台交互/">前后台交互</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/17/json与jsonp的区别/">json与jsonp的区别</a>
           </li>
         
@@ -744,10 +827,6 @@ echo $a;
         
           <li>
             <a href="/2017/11/13/php文件上传/">php文件上传</a>
-          </li>
-        
-          <li>
-            <a href="/2017/10/19/gulp自动化构建工具/">gulp自动化构建工具</a>
           </li>
         
       </ul>
